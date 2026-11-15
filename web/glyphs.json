@@ -1,5 +1,5 @@
 {
-  "source": "speech_plotter.ino",
+  "source": "voice_plotter.ino",
   "glyphCount": 27,
   "metrics": {
     "unitsPerGlyph": 10,

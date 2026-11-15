@@ -20,7 +20,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-FIRMWARE = ROOT / "firmware" / "speech_plotter" / "speech_plotter.ino"
+FIRMWARE = ROOT / "firmware" / "voice_plotter" / "voice_plotter.ino"
 WEB = ROOT / "web"
 
 FUNC_RE = re.compile(r"void drawLetter([A-Z])\(float off\)\s*\{(.*?)\n\}", re.S)

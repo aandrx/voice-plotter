@@ -1,4 +1,4 @@
-"""Speech Plotter host controller.
+"""Voice Plotter host controller.
 
 Records a phrase, transcribes it with Google Speech-to-Text, and sends the
 uppercased text to the plotter over serial. Also exposes manual text entry, a

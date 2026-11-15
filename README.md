@@ -1,4 +1,4 @@
-# Speech Plotter
+# Voice Plotter
 
 A pen plotter that writes what you say. You speak, it prints on paper.
 
@@ -8,7 +8,7 @@ turns a spoken word into handwriting at about 15 seconds per letter. Built for
 EG-UY 1004 SLDP at NYU Tandon, Fall 2025, where the team shipped it under the
 name AudioPrinter.
 
-![Speech Plotter prototype](media/photos/hero.jpeg)
+![Voice Plotter prototype](media/photos/hero.jpeg)
 
 ## What it does
 
@@ -81,7 +81,7 @@ glyph), [case study](docs/case-study.md) (long-form write-up).
 
 | Path | What it is |
 | --- | --- |
-| `firmware/speech_plotter/speech_plotter.ino` | The Arduino sketch: font, motion, protocol, LCD |
+| `firmware/voice_plotter/voice_plotter.ino` | The Arduino sketch: font, motion, protocol, LCD |
 | `host/plotter_host.py` | Speech capture, transcription, serial sender, operator menu |
 | `web/` | p5 glyph atlas and paper-layout preview |
 | `tools/extract_glyphs.py` | Parses the firmware into `web/glyphs.js` + `.json` |
@@ -110,7 +110,7 @@ glyph), [case study](docs/case-study.md) (long-form write-up).
 python3 tools/extract_glyphs.py
 ```
 
-**Firmware**: open `firmware/speech_plotter/speech_plotter.ino` in the Arduino
+**Firmware**: open `firmware/voice_plotter/voice_plotter.ino` in the Arduino
 IDE. Board: Arduino UNO. Libraries: Adafruit Motor Shield V2, AccelStepper,
 LiquidCrystal_I2C. The shields must be jumpered to 0x60 and 0x61. If motor
 initialisation fails the sketch prints the missing address and blinks the status

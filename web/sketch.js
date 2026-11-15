@@ -1,4 +1,4 @@
-// Speech Plotter stroke font atlas.
+// Voice Plotter stroke font atlas.
 //
 // Geometry comes from web/glyphs.js, which tools/extract_glyphs.py generates
 // from the firmware's drawLetter*() functions. Nothing here redefines a glyph.

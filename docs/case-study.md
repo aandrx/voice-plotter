@@ -5,7 +5,7 @@ evidence.
 
 ---
 
-## Speech Plotter
+## Voice Plotter
 
 **Voice-driven pen plotter. Four-person team, one semester.**
 
