@@ -27,9 +27,12 @@ microphone -> 16 kHz capture -> Speech-to-Text -> ASCII over serial
 
 ## Demo
 
-[`media/demo/printing-hello.mp4`](media/demo/printing-hello.mp4) is the
-submission recording, unedited: voice input, then "HELLO" printed under its own
-power. The still below is the final frame.
+[`media/demo/printing-hello-3x.mp4`](media/demo/printing-hello-3x.mp4) is the
+whole print at 3x speed, no audio: blank paper to "HELLO" in 30 seconds.
+
+The unedited submission recording, real time with audio, is
+[`media/demo/printing-hello.mp4`](media/demo/printing-hello.mp4) (89 s). The
+still below is its final frame.
 
 ![Printed HELLO](media/photos/printed-hello.jpg)
 
