@@ -20,5 +20,6 @@ Thumbs.db
 .vscode/
 .idea/
 
-# GitHub rejects single files over 100 MB. This one is 104 MB; it stays local.
+# GitHub rejects single files over 100 MB. The 104 MB original stays local;
+# IMG_4164-720p.mp4 is the archived copy.
 IMG_4164.MOV
