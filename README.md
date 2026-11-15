@@ -27,7 +27,7 @@ microphone -> 16 kHz capture -> Speech-to-Text -> ASCII over serial
 
 ## Demo
 
-![The pen drawing the first letters of HELLO](media/demo/printing-hello.webp)
+![The pen drawing the first letters of HELLO](media/demo/printing-hello.gif)
 
 [`media/demo/printing-hello-3x.mp4`](media/demo/printing-hello-3x.mp4) is the
 whole print at 3x speed, no audio: blank paper to "HELLO" in 30 seconds. The
