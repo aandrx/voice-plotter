@@ -1,0 +1,21 @@
+# Credentials: never commit these
+.env
+*.pem
+service-account*.json
+*-credentials.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Arduino
+build/
+arduino-build/
+
+# Editor and OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

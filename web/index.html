@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AudioPrinter stroke font atlas</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+    <script src="glyphs.js"></script>
+  </head>
+  <body>
+    <header class="hud hud-top">
+      <div class="brand">
+        <p class="eyebrow">AudioPrinter &middot; stroke font</p>
+        <h1 id="headline"><span id="glyph-count">27</span> glyphs, read from the firmware</h1>
+      </div>
+      <nav class="views" role="tablist">
+        <button type="button" data-view="atlas" class="is-active" aria-selected="true">Atlas</button>
+        <button type="button" data-view="layout" aria-selected="false">Paper layout</button>
+      </nav>
+    </header>
+
+    <div class="hud hud-bottom">
+      <p id="readout" class="readout">Hover a glyph. Click to watch the pen draw it.</p>
+      <p id="hint" class="hint">
+        <span><kbd>G</kbd> grid</span>
+        <span><kbd>1</kbd> atlas</span>
+        <span><kbd>2</kbd> layout</span>
+      </p>
+    </div>
+
+    <form id="composer" class="composer is-hidden" autocomplete="off">
+      <label for="word">Text</label>
+      <input id="word" name="word" value="HELLO" maxlength="40" spellcheck="false" />
+      <button type="submit">Draw</button>
+    </form>
+
+    <script src="sketch.js"></script>
+  </body>
+</html>
