@@ -19,3 +19,6 @@ arduino-build/
 Thumbs.db
 .vscode/
 .idea/
+
+# Local source materials: team CAD, videos, and course documents
+/SDLP 16/
