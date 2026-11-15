@@ -149,20 +149,14 @@ Next steps are listed in
 endstops and homing, a non-blocking motion state machine, runtime glyph data, a
 look-ahead planner, then on-device speech recognition.
 
-## Credits
+## Author
 
-Team project. I wrote the firmware and host software, the stroke font, the serial
-protocol, the code flowcharts, and ran integration testing.
+Andrew Liu. Software: firmware, stroke font, serial protocol, speech front end,
+code flowcharts, integration testing.
 
-| Person | Work |
-| --- | --- |
-| Andrew Liu | Software: firmware, stroke font, protocol, speech front end, flowcharts |
-| Katie Ma | Mechanical design, CAD, 3D printed parts, letter geometry co-author |
-| Shih Kai Chu | Circuitry, wiring, circuit diagrams, power and motor testing |
-| Fanni Miettinen | Project management, documentation, assembly |
-
-`media/diagrams/final-circuit-diagram.png` is Shih Kai Chu's work, included for
-context. CAD, 3MF, and STL sources are not in this repo.
+The machine was a four-person course project; this repo holds the software and
+the material needed to understand and demonstrate it. CAD, 3MF, and STL sources
+are not included.
 
 ## License
 
