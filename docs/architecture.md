@@ -32,7 +32,7 @@ animates position and speed, while the shield does the stepping.
 ## Software layers
 
 ```
-host/plotter_host.py                       firmware/audioprinter.ino
+host/plotter_host.py                       firmware/speech_plotter.ino
 ------------------------                   -------------------------
 sounddevice: 16 kHz mono                   Serial.readBytesUntil('\n')
         |                                          |

@@ -5,9 +5,11 @@ evidence.
 
 ---
 
-## AudioPrinter
+## Speech Plotter
 
 **Voice-driven pen plotter. Four-person team, one semester.**
+
+The team shipped it as AudioPrinter; I built the software.
 
 I led the software for a desk-sized 3-axis machine that writes what you say. The
 constraint that made it interesting: it was built as an accessibility device, so
@@ -94,8 +96,8 @@ instrumentation that made those boundaries observable from a serial log.
 
 ### Credits
 
-Team project, EG-UY 1004 SLDP, NYU Tandon, Fall 2025. Katie Ma: mechanical
-design, CAD, and co-authored letter geometry. Shih Kai Chu: circuitry and the
-circuit diagrams. Fanni Miettinen: project management, documentation, assembly.
-My work: software architecture, stroke font, serial protocol, speech front end,
-code flowcharts, integration testing.
+Team project, EG-UY 1004 SLDP, NYU Tandon, Fall 2025. Andrew Liu: software
+architecture, stroke font, serial protocol, speech front end, code flowcharts,
+integration testing. Katie Ma: mechanical design, CAD, and co-authored letter
+geometry. Shih Kai Chu: circuitry and the circuit diagrams. Fanni Miettinen:
+project management, documentation, assembly.

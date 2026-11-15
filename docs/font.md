@@ -85,7 +85,7 @@ reasons; it is also 10 units wide, so the special case has no effect on layout.
 
 ## Adding a glyph
 
-1. Write `drawLetterX()` in `firmware/audioprinter/audioprinter.ino` using only
+1. Write `drawLetterX()` in `firmware/speech_plotter/speech_plotter.ino` using only
    `getLetterX(off, n)`, `getLetterY(n)`, `drawStroke`, and `drawPolyline`.
 2. Add a `case 'X'` to the `drawLetter()` switch.
 3. Rerun `python3 tools/extract_glyphs.py`.

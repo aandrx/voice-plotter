@@ -1,4 +1,4 @@
-// AudioPrinter stroke font atlas.
+// Speech Plotter stroke font atlas.
 //
 // Geometry comes from web/glyphs.js, which tools/extract_glyphs.py generates
 // from the firmware's drawLetter*() functions. Nothing here redefines a glyph.
@@ -542,7 +542,7 @@ function updateHeadline() {
   } else {
     headline.innerHTML = `<b>${layout.text || "nothing"}</b> at ${
       FONT_METRICS.letterPitchMm
-    } mm pitch, printed by the firmware's own layout rules`;
+    } mm pitch`;
   }
 }
 
