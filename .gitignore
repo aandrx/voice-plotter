@@ -20,5 +20,5 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Local source materials: team CAD, videos, and course documents
-/SDLP 16/
+# GitHub rejects single files over 100 MB. This one is 104 MB; it stays local.
+IMG_4164.MOV
