@@ -94,10 +94,9 @@ instrumentation that made those boundaries observable from a serial log.
 
 ---
 
-### Credits
+### Author
 
-Team project, EG-UY 1004 SLDP, NYU Tandon, Fall 2025. Andrew Liu: software
-architecture, stroke font, serial protocol, speech front end, code flowcharts,
-integration testing. Katie Ma: mechanical design, CAD, and co-authored letter
-geometry. Shih Kai Chu: circuitry and the circuit diagrams. Fanni Miettinen:
-project management, documentation, assembly.
+Andrew Liu. Software: software architecture, stroke font, serial protocol,
+speech front end, code flowcharts, integration testing.
+
+Built for EG-UY 1004 SLDP, NYU Tandon, Fall 2025.
