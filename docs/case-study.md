@@ -16,6 +16,11 @@ constraint that made it interesting: it was built as an accessibility device, so
 the user must be able to operate it with almost no hand movement, and it had to
 land near consumer-electronics cost.
 
+![The pen drawing the first letters of HELLO](../media/demo/printing-hello.gif)
+
+The pen drawing the first letters of "HELLO", printed under the machine's own
+power at 3x speed.
+
 ### The problem
 
 Writing by hand excludes people with limited hand mobility. Arthritis affects
