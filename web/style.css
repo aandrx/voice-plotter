@@ -151,6 +151,18 @@ kbd {
   text-align: center;
 }
 
+.hint a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
+  pointer-events: auto;
+}
+
+.hint a:hover {
+  border-bottom-color: var(--ink);
+}
+
 .composer {
   position: fixed;
   left: 50%;

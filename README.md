@@ -52,6 +52,8 @@ python3 -m http.server 8000
 # http://localhost:8000/web/
 ```
 
+The sketch also runs on the p5 editor: [editor.p5js.org/aandrx/full/zdDhS4Kv7](https://editor.p5js.org/aandrx/full/zdDhS4Kv7).
+
 ## System design
 
 | Piece | Choice |
