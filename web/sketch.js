@@ -25,6 +25,12 @@ const SIDE = 52;
 const GAP = 24;
 const GLYPH_UNITS = 10;
 
+// ?clean=1 hides every piece of interface chrome, leaving the glyph diagrams.
+// ?view=layout opens the paper layout instead of the atlas.
+const PARAMS = new URLSearchParams(window.location.search);
+const CLEAN = PARAMS.has("clean");
+const START_VIEW = PARAMS.get("view") === "layout" ? "layout" : "atlas";
+
 const UNIT_SPEED = 17; // font units per second in the atlas view
 const PAPER_SPEED = 26; // millimetres per second in the layout view
 
@@ -45,6 +51,7 @@ function setup() {
   textFont("ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif");
 
   document.getElementById("glyph-count").textContent = GLYPH_ORDER.length;
+  if (CLEAN) document.body.classList.add("clean");
   bindControls();
   layoutAtlas();
   buildLayout(word);
@@ -61,25 +68,37 @@ function windowResized() {
 // ---------------------------------------------------------------- geometry
 
 function layoutAtlas() {
-  const rows = Math.ceil(GLYPH_ORDER.length / COLUMNS);
-  const availableH = height - ATLAS_TOP - ATLAS_BOTTOM;
-  const usableW = width - SIDE * 2 - GAP * (COLUMNS - 1);
-  const cw = usableW / COLUMNS;
+  const topInset = CLEAN ? 36 : ATLAS_TOP;
+  const bottomInset = CLEAN ? 36 : ATLAS_BOTTOM;
+  const availableH = height - topInset - bottomInset;
   const labelSpace = 34;
   const GRID_UNITS = GLYPH_UNITS + 2; // one unit of margin around the glyph box
+  const total = GLYPH_ORDER.length;
 
-  const unitByWidth = (cw * 0.88) / GRID_UNITS;
-  const unitByHeight =
-    (availableH - GAP * (rows - 1) - labelSpace * rows) / (GRID_UNITS * rows);
-  unit = Math.max(4, Math.min(unitByWidth, unitByHeight));
+  // Pick the column count that yields the largest glyphs for this viewport.
+  let best = { unit: 0, cols: COLUMNS, rows: Math.ceil(total / COLUMNS) };
+  for (let cols = 4; cols <= 12; cols += 1) {
+    const rows = Math.ceil(total / cols);
+    const cw = (width - SIDE * 2 - GAP * (cols - 1)) / cols;
+    const byWidth = (cw * 0.88) / GRID_UNITS;
+    const byHeight =
+      (availableH - GAP * (rows - 1) - labelSpace * rows) / (GRID_UNITS * rows);
+    const candidate = Math.min(byWidth, byHeight);
+    if (candidate > best.unit) best = { unit: candidate, cols, rows };
+  }
+
+  unit = Math.max(4, best.unit);
+  const cols = best.cols;
+  const rows = best.rows;
+  const cw = (width - SIDE * 2 - GAP * (cols - 1)) / cols;
 
   const rowPitch = GRID_UNITS * unit + labelSpace;
   const blockH = rows * rowPitch + GAP * (rows - 1);
-  const startY = ATLAS_TOP + Math.max(0, (availableH - blockH) / 2);
+  const startY = topInset + Math.max(0, (availableH - blockH) / 2);
 
   cells = GLYPH_ORDER.map((glyph, index) => {
-    const col = index % COLUMNS;
-    const row = Math.floor(index / COLUMNS);
+    const col = index % cols;
+    const row = Math.floor(index / cols);
     const x = SIDE + col * (cw + GAP);
     const y = startY + row * (rowPitch + GAP);
     return {
@@ -170,12 +189,12 @@ function buildLayout(text) {
     }
   }
 
-  const margin = 7;
+  const margin = CLEAN ? 3 : 7;
   const paperW = maxMm + margin * 2;
-  const paperH = lines * leadingMm + margin * 1.6;
+  const paperH = lines * leadingMm + margin * (CLEAN ? 1.0 : 1.6);
 
   const availableW = width - SIDE * 2;
-  const availableH = height - ATLAS_TOP - ATLAS_BOTTOM;
+  const availableH = height - (CLEAN ? 36 : ATLAS_TOP) - (CLEAN ? 36 : ATLAS_BOTTOM);
   const pxPerMm = Math.min(availableW / paperW, availableH / paperH, 20);
 
   layout = {
@@ -184,7 +203,7 @@ function buildLayout(text) {
     lines,
     pxPerMm,
     x: (width - paperW * pxPerMm) / 2,
-    y: ATLAS_TOP + (availableH - paperH * pxPerMm) / 2,
+    y: (CLEAN ? 36 : ATLAS_TOP) + (availableH - paperH * pxPerMm) / 2,
     w: paperW * pxPerMm,
     h: paperH * pxPerMm,
     margin,
@@ -234,8 +253,8 @@ function drawAtlas() {
   const activeCell = anim && anim.cell ? anim.cell : null;
 
   for (const cell of cells) {
-    const isHover = cell === hovered;
-    const isActive = activeCell === cell;
+    const isHover = !CLEAN && cell === hovered;
+    const isActive = !CLEAN && activeCell === cell;
 
     if (isHover || isActive) {
       noStroke();
@@ -245,7 +264,7 @@ function drawAtlas() {
 
     if (gridOn) drawCellGrid(cell);
 
-    if (gridOn && (isHover || isActive)) {
+    if (gridOn && !CLEAN && (isHover || isActive)) {
       stroke(PALETTE.accent);
       strokeWeight(1.4);
       point(cell.ox, cell.oy);
@@ -435,23 +454,25 @@ function drawLayout() {
   }
 
   // the firmware's maximum line width
-  const limitX = x + (margin + layout.maxMm) * pxPerMm;
-  stroke(PALETTE.accent);
-  strokeWeight(1);
-  drawingContext.setLineDash([4, 5]);
-  line(limitX, y + 6, limitX, y + h - 6);
-  drawingContext.setLineDash([]);
-  noStroke();
-  fill(PALETTE.accent);
-  textSize(10);
-  textAlign(RIGHT, BOTTOM);
-  text(`${layout.maxMm} mm line width`, limitX - 6, y + h - 12);
+  if (!CLEAN) {
+    const limitX = x + (margin + layout.maxMm) * pxPerMm;
+    stroke(PALETTE.accent);
+    strokeWeight(1);
+    drawingContext.setLineDash([4, 5]);
+    line(limitX, y + 6, limitX, y + h - 6);
+    drawingContext.setLineDash([]);
+    noStroke();
+    fill(PALETTE.accent);
+    textSize(10);
+    textAlign(RIGHT, BOTTOM);
+    text(`${layout.maxMm} mm line width`, limitX - 6, y + h - 12);
 
-  // origin
-  stroke(PALETTE.muted);
-  strokeWeight(1.2);
-  line(x + margin * pxPerMm - 5, y + margin * pxPerMm, x + margin * pxPerMm + 5, y + margin * pxPerMm);
-  line(x + margin * pxPerMm, y + margin * pxPerMm - 5, x + margin * pxPerMm, y + margin * pxPerMm + 5);
+    // origin
+    stroke(PALETTE.muted);
+    strokeWeight(1.2);
+    line(x + margin * pxPerMm - 5, y + margin * pxPerMm, x + margin * pxPerMm + 5, y + margin * pxPerMm);
+    line(x + margin * pxPerMm, y + margin * pxPerMm - 5, x + margin * pxPerMm, y + margin * pxPerMm + 5);
+  }
 
   for (const item of layout.placed) {
     if (GLYPHS[item.glyph].ops.length === 0) continue;
@@ -469,17 +490,19 @@ function drawLayout() {
   }
 
   // caption under the sheet
-  noStroke();
-  fill(PALETTE.muted);
-  textSize(11);
-  textAlign(LEFT, TOP);
-  text(
-    `${layout.text || "empty"}  ·  ${layout.placed.length} characters  ·  ${layout.lines} line${
-      layout.lines === 1 ? "" : "s"
-    }  ·  ${m.letterPitchMm} mm pitch  ·  ${layout.leadingMm} mm leading`,
-    x,
-    y + h + 12
-  );
+  if (!CLEAN) {
+    noStroke();
+    fill(PALETTE.muted);
+    textSize(11);
+    textAlign(LEFT, TOP);
+    text(
+      `${layout.text || "empty"}  ·  ${layout.placed.length} characters  ·  ${layout.lines} line${
+        layout.lines === 1 ? "" : "s"
+      }  ·  ${m.letterPitchMm} mm pitch  ·  ${layout.leadingMm} mm leading`,
+      x,
+      y + h + 12
+    );
+  }
 
   if (anim) advance(PAPER_SPEED);
 }
@@ -507,7 +530,7 @@ function bindControls() {
     updateHeadline();
   });
 
-  setView("atlas");
+  setView(START_VIEW);
 }
 
 function setView(next) {
@@ -526,7 +549,7 @@ function setView(next) {
 
   if (next === "layout") {
     buildLayout(word);
-    anim = { program: buildLayoutProgram(), t: 0, cell: null };
+    if (!CLEAN) anim = { program: buildLayoutProgram(), t: 0, cell: null };
     setReadout(paletteLayoutMessage());
   } else {
     setReadout(PALETTE_MESSAGE.atlas);
@@ -547,7 +570,7 @@ function updateHeadline() {
 }
 
 function mouseMoved() {
-  if (view !== "atlas") return;
+  if (CLEAN || view !== "atlas") return;
   const found = cells.find(
     (cell) =>
       mouseX >= cell.x - 6 &&
@@ -563,7 +586,7 @@ function mouseMoved() {
 }
 
 function mousePressed() {
-  if (view !== "atlas" || !hovered) return;
+  if (CLEAN || view !== "atlas" || !hovered) return;
   const cell = hovered;
   const program = buildProgram(cell.glyph, cell.ox, cell.oy, unit);
   if (!program.segments.length) return;

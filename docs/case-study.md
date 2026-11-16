@@ -11,15 +11,11 @@ evidence.
 
 The team shipped it as AudioPrinter; I built the software.
 
-I led the software for a desk-sized 3-axis machine that writes what you say. The
-constraint that made it interesting: it was built as an accessibility device, so
-the user must be able to operate it with almost no hand movement, and it had to
-land near consumer-electronics cost.
+I led the software for a desk-sized 3-axis machine that writes what you say. It
+was built as an accessibility device, so the user has to operate it with almost
+no hand movement, and it had to land near consumer-electronics cost.
 
 ![The pen drawing the first letters of HELLO](../media/demo/printing-hello.gif)
-
-The pen drawing the first letters of "HELLO", printed under the machine's own
-power at 3x speed.
 
 ### The problem
 
@@ -41,13 +37,13 @@ speech -> 16 kHz capture -> Speech-to-Text -> ASCII over serial -> stroke font -
 ```
 
 On the board: a 27-glyph stroke font authored on a 0-10 unit grid, a coordinate
-transform from units to millimetres to stepper steps, a motor abstraction that
+transform from units to millimeters to stepper steps, a motor abstraction that
 maps four stepper axes onto two I2C motor shields with a different sign
 convention on each, and a serial protocol that carries renderable text, bench
 jog commands, and an emergency stop.
 
 On the host: microphone capture, cloud transcription, serial writes, a telemetry
-thread that colour-codes the board's log stream, and an operator menu with a
+thread that color-codes the board's log stream, and an operator menu with a
 motor-test submenu so the machine could be commissioned without a terminal
 session.
 
@@ -94,8 +90,8 @@ and on-device speech recognition so the device is not tethered to a laptop.
 The software was never the hard part in isolation. Every difficult bug lived at
 a boundary: font space against paper space, one motor's direction against
 another's, a blocking loop against an operator who wants to stop the machine
-now. The most useful thing I built was not the font or the parser, it was the
-instrumentation that made those boundaries observable from a serial log.
+now. The most useful thing I built was the instrumentation that made those
+boundaries observable from a serial log.
 
 ---
 

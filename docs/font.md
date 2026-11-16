@@ -1,7 +1,9 @@
 # The stroke font
 
+![Glyph atlas](../media/photos/atlas.png)
+
 Every letter is drawn as absolute strokes on a 0-10 unit box, y down. The
-firmware then scales units to millimetres and millimetres to steps:
+firmware then scales units to millimeters and millimeters to steps:
 
 ```
 mm    = units * 0.7
@@ -32,7 +34,7 @@ the current line's offset. That is the entire local coordinate system.
 
 ## Metrics
 
-| Quantity | Units | Millimetres | Steps |
+| Quantity | Units | Millimeters | Steps |
 | --- | --- | --- | --- |
 | Glyph box | 10 | 7.0 | 70 |
 | Letter spacing | 1.2 | 0.84 | 12 |

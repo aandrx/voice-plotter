@@ -221,3 +221,9 @@ kbd {
     flex-direction: column;
   }
 }
+
+/* ?clean=1: glyph diagrams only, no interface chrome */
+body.clean .hud,
+body.clean .composer {
+  display: none;
+}

@@ -2,11 +2,11 @@
 
 A pen plotter that writes what you say. You speak, it prints on paper.
 
-I built the software for this as a four-person engineering project: a desk-sized
-3-axis machine, modelled on the motion system of an open-frame 3D printer, that
-turns a spoken word into handwriting at about 15 seconds per letter. Built for
-EG-UY 1004 SLDP at NYU Tandon, Fall 2025, where the team shipped it under the
-name AudioPrinter.
+I built the software for this four-person engineering project. The machine is a
+desk-sized 3-axis plotter, modeled on the motion system of an open-frame 3D
+printer, that turns a spoken word into handwriting at about 15 seconds per
+letter. It was built for EG-UY 1004 SLDP at NYU Tandon, Fall 2025, where the
+team shipped it as AudioPrinter.
 
 ![Voice Plotter prototype](media/photos/hero.jpeg)
 
@@ -29,34 +29,27 @@ microphone -> 16 kHz capture -> Speech-to-Text -> ASCII over serial
 
 ![The pen drawing the first letters of HELLO](media/demo/printing-hello.gif)
 
-[`media/demo/printing-hello-3x.mp4`](media/demo/printing-hello-3x.mp4) is the
-whole print at 3x speed, no audio: blank paper to "HELLO" in 30 seconds. The
-unedited submission recording, real time with audio, is
-[`media/demo/printing-hello.mp4`](media/demo/printing-hello.mp4) (89 s).
+[`printing-hello-3x.mp4`](media/demo/printing-hello-3x.mp4) runs the whole print
+at 3x with no audio. The unedited recording, real time with audio, is
+[`printing-hello.mp4`](media/demo/printing-hello.mp4).
 
 ![Printed HELLO](media/photos/printed-hello.jpg)
 
-## The font atlas
-
-[`web/`](web/) is an interactive atlas of all 27 glyphs, generated from the
-firmware rather than transcribed. `tools/extract_glyphs.py` parses
-`drawLetterA()` through `drawLetterZ()`, resolves the `getLetterX` /
-`getLetterY` calls back into coordinates, and writes `web/glyphs.js`. Change a
-glyph in the firmware, rerun the script, and the atlas follows.
+## Glyph atlas
 
 ![Glyph atlas](media/photos/atlas.png)
 
-Hover shows stroke count and draw length. Clicking draws the glyph in the
-firmware's own order: dashed pen-up travel, solid pen-down strokes, moving pen.
-
 ![Paper layout](media/photos/layout.png)
 
-The second view lays out any text exactly as the machine would place it, in
-millimetres, with the 40 mm line limit and five glyphs per line, then prints it.
+`tools/extract_glyphs.py` reads `drawLetterA()` through `drawLetterZ()` and
+writes `web/glyphs.js`, so the atlas is drawn from the same numbers the machine
+uses. `web/` is interactive: click a glyph to watch the pen draw it, or switch
+to the paper layout and type your own text. Add `?clean=1` to render the
+diagrams without the interface.
 
 ```bash
 python3 -m http.server 8000
-# open http://localhost:8000/web/
+# http://localhost:8000/web/
 ```
 
 ## System design
@@ -70,10 +63,9 @@ python3 -m http.server 8000
 | Protocol | Newline-terminated ASCII: text to render, jog commands, `STOP` |
 | Feedback | None. Open loop, no endstops, no encoders |
 
-The interesting part is the seam at the serial port. Speech and motion were
-developed as separate systems against a virtual COM port pair, then integrated
-once the frame existed. Everything above the seam is Python and a cloud API;
-everything below is firmware that knows only text and coordinates.
+Speech and motion were built as separate systems and joined at the serial port.
+Everything above it is Python and a cloud API. Everything below is firmware that
+knows only text and coordinates.
 
 Deeper notes: [architecture](docs/architecture.md) (wiring, axis signs, protocol
 table, motion maths), [design decisions](docs/design-decisions.md) (what was
@@ -91,7 +83,7 @@ glyph), [case study](docs/case-study.md) (long-form write-up).
 | `media/` | Photos, demo clip, code flowchart, circuit diagram |
 | `docs/` | Architecture, decisions, font, case study |
 
-## Numbers that matter
+## Numbers
 
 | Quantity | Value | Source |
 | --- | --- | --- |
@@ -105,21 +97,16 @@ glyph), [case study](docs/case-study.md) (long-form write-up).
 
 ## Running it
 
-**Atlas**: needs only a static server, above.
+The atlas needs only a static server, above. Regenerate the glyph data with
+`python3 tools/extract_glyphs.py`.
 
-**Regenerating glyph data**:
-
-```bash
-python3 tools/extract_glyphs.py
-```
-
-**Firmware**: open `firmware/voice_plotter/voice_plotter.ino` in the Arduino
+**Firmware.** Open `firmware/voice_plotter/voice_plotter.ino` in the Arduino
 IDE. Board: Arduino UNO. Libraries: Adafruit Motor Shield V2, AccelStepper,
 LiquidCrystal_I2C. The shields must be jumpered to 0x60 and 0x61. If motor
-initialisation fails the sketch prints the missing address and blinks the status
+initialization fails the sketch prints the missing address and blinks the status
 LED instead of moving.
 
-**Host**:
+**Host.**
 
 ```bash
 cd host

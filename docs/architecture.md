@@ -43,7 +43,7 @@ uppercase, strip                            glyph table  bench commands
 pyserial write "TEXT\n"  ----------->       coordinate transform
                                                |
 pyserial read thread  <-----------          AccelStepper (4 axes)
-  colour-coded telemetry                       |
+  color-coded telemetry                       |
                                           Adafruit Motor Shield
                                                |
                                           4 stepper motors
@@ -126,7 +126,7 @@ line.
 
 `drawLetter()` dispatches to 26 routines. Each routine is a handful of absolute
 strokes expressed as `drawStroke(x1, y1, x2, y2)` or a point array passed to
-`drawPolyline()`. The routines do not know about steps, millimetres, or the
+`drawPolyline()`. The routines do not know about steps, millimeters, or the
 paper; that is all in the transform helpers.
 
 ## Instrumentation
