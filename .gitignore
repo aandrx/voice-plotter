@@ -23,3 +23,11 @@ Thumbs.db
 # GitHub rejects single files over 100 MB. The 104 MB original stays local;
 # IMG_4164-720p.mp4 is the archived copy.
 IMG_4164.MOV
+
+# Team documents kept local, not published
+/SDLP 16/Project Schedule/
+/SDLP 16/SUBMISSION/final Engineering Notebook.docx
+/SDLP 16/SUBMISSION/final SLDP 16 - Project Schedule.xlsx
+/SDLP 16/\[Fall 2025\] SLDP 16 Showcase Application Materials./Milestone 2 Presentation/
+/SDLP 16/Code/Draft Test Code/Katie_s Draft Code.docx
+/SDLP 16/Code/Draft Test Code/Vincy_s Draft Code.docx

@@ -67,8 +67,10 @@ Speech and motion were built as separate systems and joined at the serial port.
 Everything above it is Python and a cloud API. Everything below is firmware that
 knows only text and coordinates.
 
+![Code flowchart](media/diagrams/final-code-flowchart.png)
+
 Deeper notes: [architecture](docs/architecture.md) (wiring, axis signs, protocol
-table, motion maths), [design decisions](docs/design-decisions.md) (what was
+table, motion math), [design decisions](docs/design-decisions.md) (what was
 tried, rejected, and why), [the font](docs/font.md) (grid, metrics, adding a
 glyph), [case study](docs/case-study.md) (long-form write-up).
 
